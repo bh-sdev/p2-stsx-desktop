@@ -1,0 +1,32 @@
+@import "fonts";
+@import "title";
+@import "overides";
+
+html, body, #root, .page {
+  font-family: $R-Regular, sans-serif !important;
+  font-size: 12px;
+  height: 100%;
+  margin: 0;
+}
+
+.ellipse {
+  width: 100%;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+
+.status {
+  &-green {
+    background: #b2ff80 !important;
+  }
+  &-yellow {
+    background: #feff65 !important;
+  }
+  &-blue {
+    background: #65faff !important;
+  }
+  &-gray {
+    background: #d5d5d5 !important;
+  }
+}

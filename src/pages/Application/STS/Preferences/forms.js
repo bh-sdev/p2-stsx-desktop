@@ -1,0 +1,85 @@
+export const FormDisplay = {
+  Lang: '',
+};
+export const FormPurchaseOrder = {
+  PurchaseOrder: '',
+};
+export const FormWireless = {
+  AllowInterimLoadShipments: true,
+  AllowRFRecvLoadNumberChanges: false,
+  AllowRFShipLoadNumberChanges: false,
+  EnableLocationWtPcCalculationOnTrans: false,
+  RFPromptTimeoutSec: 7,
+  RangeQty: 0,
+  TurnoffF8CapabilitiesExceptShipping: false,
+  TurnoffF8CapabilitiesOnAllScreens: false,
+  WelderGroup: 0,
+};
+export const FormPowerFab = {
+  AllowAuditScans: false,
+  DoNotPassTheIdNumber: false,
+  DoNotPrintScrapLabels: false,
+  DoNotPushSecLocToFS: false,
+  FabSuiteDatabase: '',
+  FabSuiteInstallation: false,
+  FabSuitePassword: '',
+  FabSuiteServerName: '',
+  FabSuiteUserID: '',
+  FlipPrimarySecondaryLocsWhenShop: false,
+  ImportsOnly: false,
+  LocFieldDataRepBatchIdInfo: false,
+  MultiplyByQuantity: false,
+  MultiplyByWorkers: false,
+  PassWorkerId: false,
+  PrintIdFromCutList: false,
+  SetBundledToYes: false,
+  SetFinalizeToYes: false,
+};
+export const FormMaterial = {
+  // AutoNumberGeneration: false,
+  // MaterialTypeNumLen: null,
+  // MaxDropLenGoingToScrap: null,
+  // ModuleInstalled: false,
+  // PartNumPadCharacter: '',
+  RawMaterialSerialNumLen: null,
+  // ValidateAgainst: '',
+  // ValidatePiecemark: false,
+};
+export const FormHardware = {
+  ActivateTransactionTracking: false,
+  AutoLoadNumberCalc: '',
+  AutoLoadStartingNumber: 0,
+  CopyPreviousLoadInfo: false,
+  FirstLineOfIDBarcodeLabel: '',
+  LoadNumEqualsRecvNum: false,
+  LoadNumEqualsShipLoadNum: false,
+  SecondLineOfIDBarcodeLabel: '',
+};
+export const FormMiscInfo = {
+  BarcodeLength: null,
+  CategoryCodesPOSpecific: false,
+  DefaultRoutingCodeID: '',
+  DefaultTruckMaxWeightKg: null,
+  InstalledAt: '',
+  KeepMinorPiecemarksUponImport: false,
+  MarkUniqueZipFileName: '',
+  MaximumLoginIdleTimeMin: null,
+  Metric: false,
+  MultipleIDPromptQuantityGreater: null,
+  MultipleIDPromptWeightLess: null,
+  ReceiverZipFileName: '',
+  TimedStatusShowManHours: false,
+  UseJobNumberForMarkUniqueZip: false,
+  UseJobNumberForReceiverZip: false,
+  YourCustomerNum: '',
+};
+export const FormDataPath = {
+  Base: '',
+  Export: '',
+  FoxFire: '',
+  Import: '',
+  MTRPDF: '',
+  ReportForm: '',
+  Temp: '',
+  WareHouse: '',
+};
