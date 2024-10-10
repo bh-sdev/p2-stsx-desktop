@@ -21,6 +21,8 @@ const PowerFab = ({ ID, isEdit, control, data, setValue }) => {
 
   const disabled = !data?.FabSuiteInstallation || !isEdit;
 
+  const remoteServerDisabled = !data?.FabSuiteUseRemoteServer || !isEdit;
+
   const testConnection = async () => {
     setTesting(true);
     try {
@@ -180,6 +182,8 @@ const PowerFab = ({ ID, isEdit, control, data, setValue }) => {
                     field.onChange(e.value === null ? '' : e.value);
                   }}
                   className={classNames({ 'w-full': true, required: data.FabSuiteInstallation })}
+                  maxLength={FORMS_CONFIG.FORM_POWER_FAB.fieldLength.FabSuiteServerPort}
+                  max={FORMS_CONFIG.FORM_POWER_FAB.maxFieldValue.FabSuiteServerPort}
                 />
               )}
             />
@@ -452,6 +456,65 @@ const PowerFab = ({ ID, isEdit, control, data, setValue }) => {
               />
             </div>
           </div>
+        </div>
+        <div className="flex flex-wrap mb-2 align-items-center w-full pt-2">
+          <div className="w-2 text-right pr-4"></div>
+          <div className="w-9">
+            <Controller
+              name={`${[ID]}.FabSuiteUseRemoteServer`}
+              control={control}
+              render={({ field }) => (
+                <div className="w-full flex align-items-center w-6">
+                  <Checkbox
+                    {...field}
+                    onChange={(e) => {
+                      // console.log("CHANGED: ", e);
+                      field.onChange(e.checked);
+                    }}
+                    disabled={!isEdit}
+                    inputId="FabSuiteUseRemoteServer"
+                    checked={field.value}
+                  />
+                  <label htmlFor="FabSuiteUseRemoteServer" className="ml-2 cursor-pointer">
+                    {t('sts.txt.applications.fs.use_remote_server')}
+                  </label>
+                </div>
+              )}
+            />
+          </div>
+          {/* <div className="w-full" /> */}
+          <div className="w-2 text-right pr-0"></div>
+          <div className="w-4 flex pt-2">
+            <div className="w-4 text-right pt-1 pr-2">
+              {t('sts.txt.applications.fs.remote_server_port')}#:
+            </div>
+            <div className="w-8 text-right pr-0">
+              <Controller
+                name={`${[ID]}.FabSuiteRemoteServerPort`}
+                control={control}
+                render={({ field }) => (
+                  <InputNumber
+                    {...field}
+                    value={field.value === '' ? null : field.value}
+                    useGrouping={false}
+                    disabled={disabled || remoteServerDisabled}
+                    onChange={(e) => {
+                      field.onChange(e.value === null ? '' : e.value);
+                    }}
+                    className={classNames({
+                      'w-full': true,
+                      required: !remoteServerDisabled,
+                    })}
+                    maxLength={FORMS_CONFIG.FORM_POWER_FAB.fieldLength.FabSuiteServerPort}
+                    max={FORMS_CONFIG.FORM_POWER_FAB.maxFieldValue.FabSuiteServerPort}
+                  />
+                )}
+              />
+              {/* {JSON.stringify({ d: data.FabSuiteUseRemoteServer })} */}
+              {/* {JSON.stringify({ remoteServerDisabled })} */}
+            </div>
+          </div>
+          {/*  */}
         </div>
       </div>
     </div>

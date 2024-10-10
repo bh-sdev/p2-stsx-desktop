@@ -30,6 +30,7 @@ export const FORM_EMPLOYEE = {
     OtherPhone3: 25,
     OtherPhone4: 25,
     ThirdPartyLogin: 25,
+    ThirdPartyPassword: 50,
     Username: 25,
     WorkPhone: 25,
     Ssn: 15,
@@ -142,6 +143,10 @@ export const FORM_KISS = {
 export const FORM_POWER_FAB = {
   fieldLength: {
     FabSuiteServerName: 100,
+    FabSuiteServerPort: 5,
+  },
+  maxFieldValue: {
+    FabSuiteServerPort: 65535,
   },
 };
 

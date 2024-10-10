@@ -363,6 +363,7 @@ const Employee = ({ data, isEdit, control }) => {
                       />
                     </div>
                   </div>
+
                   <div className="my-1">
                     <div className="flex align-items-center">
                       <div className="mr-4 w-7">{t('sts.label.party.employee.login')}:</div>
@@ -378,6 +379,27 @@ const Employee = ({ data, isEdit, control }) => {
                               'p-invalid': fieldState.invalid,
                             })}
                             maxLength={FORMS_CONFIG.FORM_EMPLOYEE.fieldLength.ThirdPartyLogin}
+                          />
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div className="my-1">
+                    <div className="flex align-items-center">
+                      <div className="mr-4 w-7">{t('sts.label.party.employee.password')}:</div>
+                      <Controller
+                        name="Password"
+                        control={control}
+                        render={({ field, fieldState }) => (
+                          <InputText
+                            disabled={!isActiveFields}
+                            id={field.name}
+                            type="password"
+                            {...field}
+                            className={classNames({
+                              'p-invalid': fieldState.invalid,
+                            })}
+                            maxLength={FORMS_CONFIG.FORM_EMPLOYEE.fieldLength.ThirdPartyPassword}
                           />
                         )}
                       />

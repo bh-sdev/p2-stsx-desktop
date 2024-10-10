@@ -34,6 +34,8 @@ export const FormPowerFab = {
   PrintIdFromCutList: false,
   SetBundledToYes: false,
   SetFinalizeToYes: false,
+  FabSuiteUseRemoteServer: false,
+  FabSuiteRemoteServerPort: 0,
 };
 export const FormMaterial = {
   // AutoNumberGeneration: false,

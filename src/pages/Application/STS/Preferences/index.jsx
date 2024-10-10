@@ -84,6 +84,10 @@ const ValidationSchema = yup.object({
       is: true,
       then: (schema) => schema.required(),
     }),
+    FabSuiteRemoteServerPort: yup.string().when('FabSuiteUseRemoteServer', {
+      is: true,
+      then: (schema) => schema.required(),
+    }),
   }),
   [convertIntoAvailableKey(SCREEN.hardware)]: yup.object({
     AutoLoadStartingNumber: yup.number().when('AutoLoadNumberCalc', {
@@ -130,7 +134,7 @@ const Preferences = () => {
       Name: SCREEN.powerFab,
       ID: convertIntoAvailableKey(SCREEN.powerFab),
       form: FormPowerFab,
-      disabled: shouldDisable(SCREEN.powerFab),
+      disabled: shouldDisable(SCREEN.powerFab, false),
       request: preferencesFabSuiteGet,
     },
     {
