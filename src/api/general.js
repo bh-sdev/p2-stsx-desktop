@@ -8,6 +8,7 @@ import {
   JWTRefreshInterceptor,
   CommonErrorInterceptor,
 } from './interceptors';
+import { subscribeAxios } from 'configs/api.config';
 
 export const removeEmptyParams = (params) => {
   for (const key of Object.keys(params)) {
@@ -29,14 +30,17 @@ export const cancelingAllRequests = () => {
 };
 
 const BaseAPIConstructor = (TokenStorageService) => {
-  const driver = axios.create(API_CONFIG);
+  const driver = axios.create(API_CONFIG); //axios.create(API_CONFIG);
+  subscribeAxios(driver);
   driver.interceptors.request.use(JWTInsertionInterceptor(TokenStorageService));
   driver.interceptors.response.use((response) => response, CommonErrorInterceptor());
+  BaseAPIConstructor.driver = driver;
   return driver;
 };
 
 const AuthorizedAPIConstructor = (TokenStorageService) => {
   const driver = axios.create(API_CONFIG);
+  subscribeAxios(driver);
   driver.interceptors.request.use(JWTInsertionInterceptor(TokenStorageService));
   driver.interceptors.response.use(
     (response) => response,

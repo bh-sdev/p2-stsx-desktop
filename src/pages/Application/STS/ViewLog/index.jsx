@@ -26,6 +26,7 @@ import axios from 'axios';
 import useSortTableAssist from 'hooks/useSortTableAssist';
 import useTableNavigation from 'hooks/useTableNavigation';
 import { DEFAULT_CELL_WIDTH, DEFAULT_ROW_HEIGHT } from 'const';
+import { API_CONFIG } from 'configs';
 
 const ViewLog = () => {
   const { sendPost, receivedData, blockedAll } = useWindowControl(
@@ -142,7 +143,8 @@ const ViewLog = () => {
   const exportExcel = () => {
     setExportLoading(true);
     axios({
-      url: `${process.env.REACT_APP_API_ROOT}logs/export`,
+      // url: `${process.env.REACT_APP_API_ROOT}logs/export`,
+      url: `${API_CONFIG.baseURL}logs/export`,
       method: 'POST',
       headers: {
         Authorization: `Bearer ${TokenStorageService.getToken()}`,
