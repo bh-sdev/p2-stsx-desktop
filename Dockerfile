@@ -1,15 +1,21 @@
 # Stage 1: Build the React application
-FROM node:20.18-alpine AS build
+FROM node:20-alpine AS build
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
+# COPY package.docker.json ./package.json
+# COPY package-lock.json ./package-lock.json
 
 # Install dependencies
-RUN npm audit fix
-RUN npm install
+ENV CI=true
+ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm cache clear --force
+RUN npm config set strict-ssl false && npm install  --no-audit
+# RUN npm audit fix --force
+# RUN npm install
 
 # Copy the rest of the application code
 COPY . .
