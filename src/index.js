@@ -25,11 +25,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const boot = async () => {
   try {
     const res = await fetch('/env.json').then((e) => e.json());
-    // console.log('RES: ', { res, API_CONFIG: { ...API_CONFIG } });
     if (res?.BASE_API_URL !== undefined) {
       updateBaseURL(res.BASE_API_URL);
     }
-    // console.log('RES AFTERMAT: ', { res, API_CONFIG: { ...API_CONFIG } });
+  } catch (err) {
+    console.error(err);
   } finally {
     root.render(
       <React.StrictMode>
