@@ -23,7 +23,7 @@ import { removeEmptyParams } from 'api/general';
 import {
   kissImportUpdate,
   kissJobRecords,
-  kissJobRecordsUpdateCash,
+  kissJobRecordsUpdateCache,
   kissPreferences,
   kissReportsLoads,
   kissRoutingCodes,
@@ -281,7 +281,7 @@ const KissImportTable = ({ data }) => {
     }
   };
 
-  const updateViewInfo = async (data) => {
+  const updateViewInfo = async (data, discardTypes) => {
     try {
       setLoading(true);
       tableRef.current.reset();
@@ -289,6 +289,7 @@ const KissImportTable = ({ data }) => {
         job_id: data.JobID,
         with_settings: refWithSettings.current,
         keep_minors: data.ImportPreferences.KeepMinors,
+        discard_types: discardTypes,
       });
       formTable.reset({
         Parts: Parts.sort((a, b) => (a.ImportQuantity > b.ImportQuantity ? -1 : 1)),
@@ -584,8 +585,12 @@ const KissImportTable = ({ data }) => {
       rejectLabel: t('sts.btn.yes'),
       rejectClassName: 'p-button-primary',
       reject: async () => {
+        console.log('REJECTED!');
         try {
-          await kissJobRecordsUpdateCash({ Parts: formTable.getValues().Parts, JobID: data.JobID });
+          await kissJobRecordsUpdateCache({
+            Parts: formTable.getValues().Parts,
+            JobID: data.JobID,
+          });
           await kissSaveDiscardTypes({ DiscardTypes: data.DiscardTypes });
           if (!refWithSettings.current) {
             refWithSettings.current = true;
@@ -609,17 +614,21 @@ const KissImportTable = ({ data }) => {
 
   const requestApplySettings = async (data, updateData = true) => {
     try {
-      await kissJobRecordsUpdateCash({ Parts: formTable.getValues().Parts, JobID: data.JobID });
+      let discardStr = undefined;
+      await kissJobRecordsUpdateCache({ Parts: formTable.getValues().Parts, JobID: data.JobID });
       await kissSavePreferences(removeEmptyParams(data.ImportPreferences), { job_id: data.JobID });
       if (formFilter.dirtyFields.DiscardTypes) {
-        await kissSaveDiscardTypes({ DiscardTypes: data.DiscardTypes });
+        // TODO: Revert to save discard_types here instead of including as string
+        // await kissSaveDiscardTypes({ DiscardTypes: data.DiscardTypes });
+        const discardJson = JSON.stringify(data.DiscardTypes);
+        discardStr = btoa(discardJson);
       }
       formFilter.reset(formFilter.getValues());
       if (!refWithSettings.current) {
         refWithSettings.current = true;
         window.history.pushState(null, '', `${window.location.href}&with_settings=true`);
       }
-      updateData && updateViewInfo(data);
+      updateData && updateViewInfo(data, discardStr);
     } catch (e) {
       confirmDialog({
         closable: false,

@@ -11,7 +11,7 @@ export const kissJobById = (params) => AuthorizedAPI.get(kiss.job, { params });
 
 export const kissJobRecords = (params) => AuthorizedAPI.get(kiss.records, { params });
 
-export const kissJobRecordsUpdateCash = (data) => AuthorizedAPI.post(kiss.records, data);
+export const kissJobRecordsUpdateCache = (data) => AuthorizedAPI.post(kiss.records, data);
 
 export const kissJobNumbers = (params) => AuthorizedAPI.get(kiss.jobNumbers, { params });
 
